@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>Test</title>
+    <style>
+      .flowplayer {
+        background-color: #00abcd;
+      }
+      .flowplayer .fp-color-play {
+        fill: #eee;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://releases.flowplayer.org/7.2.7/skin/skin.css"
+    />
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://releases.flowplayer.org/7.2.7/flowplayer.min.js"></script>
+  </head>
+
+  <body>
+    <!-- <video controls id="video"></video>
+    <input type="text" />
+    <button id="load">Load</button> -->
+
+    <div id="player" class="fp-slim"></div>
+
+    <script>
+      // document.cookie = "username=John Doe";
+
+      // if (Hls.isSupported()) {
+      //   var video = document.getElementById("video");
+      //   var hls = new Hls();
+      //   hls.attachMedia(video);
+      //   hls.on(Hls.Events.MANIFEST_PARSED, function() {
+      //     video.play();
+      //   });
+      //   document.querySelector("#load").addEventListener("click", function() {
+      //     console.log(document.querySelector("input").value);
+      //     hls.loadSource(document.querySelector("input").value);
+      //   });
+      // } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      //   video.addEventListener("canplay", function() {
+      //     video.play();
+      //   });
+      //   document.querySelector("#load").addEventListener("click", function() {
+      //     video.src = document.querySelector("input").value;
+      //   });
+      // }
+
+      let arr = ['Stoner', 'Bonnie', 'Fuck', 'World']
+      let idx = 0;
+
+      flowplayer("#player", {
+        aspectRatio: "12:5",
+        hlsjs: {
+          xhrSetup: function(xhr, url) {
+            xhr.withCredentials = false;
+            document.cookie = "test1=" + url;
+            xhr.open('GET', url, true);
+            xhr.setRequestHeader("X-fuck", url.split('/')[4]);
+          }
+        },
+        clip: {
+          sources: [
+            {
+              type: "application/x-mpegurl",
+              src: "/streams/output.m3u8"
+            }
+          ],
+          title: "Javascript setup"
+        }
+      });
+    </script>
+  </body>
+</html>
